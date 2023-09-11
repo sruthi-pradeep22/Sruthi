@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokeAPI Results</title>
+</head>
+<body style="background-color: aqua;">
+    <div id="root"></div>
+    <button onclick="apicaller()">Click me</button>
+    <script>
+        async function apicaller() {
+            let div = document.getElementById('root');
+            let apiResponse = await fetch('https://pokeapi.co/api/v2/pokemon/');
+            let apiData = await apiResponse.json();
+
+            let h1 = document.createElement('h1');
+            h1.innerHTML = `Count: ${apiData.count}`;
+            div.appendChild(h1);
+
+            let h2 = document.createElement('h2');
+            h2.innerHTML = `Next: ${apiData.next}`;
+            div.appendChild(h2);
+
+            let h3 = document.createElement('h3');
+            h3.innerHTML = `Previous: ${apiData.previous}`;
+            div.appendChild(h3);
+
+            let h4 = document.createElement('h4');
+            h4.innerHTML = `Results:`;
+
+            let ul = document.createElement('ul');
+            apiData.results.forEach((result) => {
+                let li = document.createElement('li');
+                let a = document.createElement('a');
+                let pokemonName = result.name; // Extract the Pokemon name
+                a.href = `https://www.pokemon.com/us/pokedex/${pokemonName}/`; // Construct the URL
+                a.textContent = result.name; // Display the Pokemon name as link text
+                li.appendChild(a);
+                ul.appendChild(li);
+            });
+
+            h4.appendChild(ul);
+            div.appendChild(h4);
+        }
+    </script>
+</body>
+</html>

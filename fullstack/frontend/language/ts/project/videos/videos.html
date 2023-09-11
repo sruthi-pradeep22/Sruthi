@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="styles.css">
+<title>Multiple Videos</title>
+<h1>DISPLAYING MULTIPLE VIDEOS</h1>
+<body style="background-color: aqua;"></body>
+<style>
+    body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.video-container {
+  margin: 20px;
+}
+
+.video {
+  width: 300px;
+  max-width: 100%;
+}
+
+button {
+  margin-top: 20px;
+}
+
+</style>
+</head>
+<body>
+<div class="video-container" id="video1">
+  <video class="video" controls>
+    <source src="v1.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+<div class="video-container" id="video2">
+  <video class="video" controls>
+    <source src="v2.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+<div class="video-container" id="video2">
+  <video class="video" controls>
+    <source src="v3.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+<button id="playAll">Play All Videos</button>
+<script>
+    const videos = document.querySelectorAll('.video');
+const playAllButton = document.getElementById('playAll');
+
+playAllButton.addEventListener('click', playAllVideos);
+
+function playAllVideos() {
+  videos.forEach(video => video.play());
+}
+
+</script>
+</body>
+</html>

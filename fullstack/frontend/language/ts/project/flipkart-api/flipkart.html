@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Display</title>
+</head>
+<body style="background-color: aqua;">
+<button onclick="apicaller()">Click me</button>
+<div id="root"></div>
+<script>
+    async function apicaller() {
+        let div = document.getElementById('root');
+
+        let data = await (await fetch('https://fakestoreapi.com/products')).json();
+
+        data.forEach((card) => {
+            let productDiv = document.createElement("div");
+            productDiv.style.border = "1px solid black";
+            productDiv.style.padding = "10px";
+            productDiv.style.margin = "10px";
+
+            let img = document.createElement("img");
+            img.src = card.image;
+            img.height = 200;
+            img.width = 200;
+
+            let productName = document.createElement("h2");
+            productName.textContent = card.title; // Display product name
+            productName.style.marginTop = "5px";
+
+            let price = document.createElement("p");
+            price.textContent = `$${card.price.toFixed(2)}`; // Display price with two decimal places
+
+            productDiv.appendChild(img);
+            productDiv.appendChild(productName);
+            productDiv.appendChild(price);
+
+            div.appendChild(productDiv);
+        });
+    }
+</script>
+</body>
+</html>

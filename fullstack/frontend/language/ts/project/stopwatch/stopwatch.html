@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stopwatch</title>
+<style>
+    body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.stopwatch {
+  text-align: center;
+}
+
+.time {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.start-btn, .stop-btn, .reset-btn {
+  font-size: 1rem;
+  padding: 5px 10px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.start-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.stop-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.reset-btn {
+  background-color: #2196f3;
+  color: white;
+}
+
+</style>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="stopwatch">
+  <div class="time" id="time">00:00:00</div>
+  <button class="start-btn" id="startBtn">Start</button>
+  <button class="stop-btn" id="stopBtn">Stop</button>
+  <button class="reset-btn" id="resetBtn">Reset</button>
+</div>
+<script>
+    let timer;
+let startTime;
+let elapsedTime = 0;
+let isRunning = false;
+
+const timeDisplay = document.getElementById('time');
+const startBtn = document.getElementById('startBtn');
+const stopBtn = document.getElementById('stopBtn');
+const resetBtn = document.getElementById('resetBtn');
+
+function updateTime() {
+  const now = Date.now();
+  elapsedTime += now - startTime;
+  startTime = now;
+  const formattedTime = new Date(elapsedTime).toISOString().substr(11, 8);
+  timeDisplay.textContent = formattedTime;
+}
+
+startBtn.addEventListener('click', () => {
+  if (!isRunning) {
+    isRunning = true;
+    startBtn.textContent = 'Pause';
+    startTime = Date.now() - elapsedTime;
+    timer = setInterval(updateTime, 10);
+  } else {
+    isRunning = false;
+    startBtn.textContent = 'Resume';
+    clearInterval(timer);
+  }
+});
+
+stopBtn.addEventListener('click', () => {
+  isRunning = false;
+  startBtn.textContent = 'Start';
+  clearInterval(timer);
+});
+
+resetBtn.addEventListener('click', () => {
+  isRunning = false;
+  startBtn.textContent = 'Start';
+  clearInterval(timer);
+  elapsedTime = 0;
+  timeDisplay.textContent = '00:00:00';
+});
+
+</script>
+</body>
+</html>

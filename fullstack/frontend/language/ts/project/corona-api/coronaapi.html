@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID-19 Data</title>
+</head>
+
+<body style="background-color: aqua;">
+    <div id="root"></div>
+
+    <button onclick="apicaller()">Click me</button>
+    <script>
+        async function apicaller() {
+            let div = document.getElementById('root');
+            
+            try {
+                let apiData = await fetch('https://data.covid19india.org/data.json');
+                let jsonData = await apiData.json();
+                
+                let casesTimeSeries = jsonData.cases_time_series;
+
+                casesTimeSeries.forEach(item => {
+                    let dataItem = document.createElement('div');
+                    dataItem.style.border = "1px solid black";
+                    dataItem.style.padding = "10px";
+                    dataItem.style.margin = "10px";
+                    
+                    let date = document.createElement('p');
+                    date.textContent = `Date: ${item.date}`;
+
+                    let dailyConfirmed = document.createElement('p');
+                    dailyConfirmed.textContent = `Daily Confirmed: ${item.dailyconfirmed}`;
+
+                    let totalConfirmed = document.createElement('p');
+                    totalConfirmed.textContent = `Total Confirmed: ${item.totalconfirmed}`;
+
+                    let totalDeceased = document.createElement('p');
+                    totalDeceased.textContent = `Total Deceased: ${item.totaldeceased}`;
+
+                    dataItem.appendChild(date);
+                    dataItem.appendChild(dailyConfirmed);
+                    dataItem.appendChild(totalConfirmed);
+                    dataItem.appendChild(totalDeceased);
+
+                    div.appendChild(dataItem);
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+    </script>
+</body>
+
+</html>

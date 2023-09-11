@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub User Profiles</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <button onclick="apicaller()">Click me</button>
+    <script>
+        async function apicaller() {
+            let div = document.getElementById('root');
+            
+            try {
+                let apiData = await fetch('https://api.github.com/users');
+                let users = await apiData.json();
+
+                users.forEach((item) => {
+                    let h1 = document.createElement('h1');
+                    let h2 = document.createElement('h2');
+                    let h3 = document.createElement('h3');
+                    let img = document.createElement('img');
+                    let userLink = document.createElement('a'); // Create an anchor element
+
+                    // Set the href attribute of the anchor to the user's GitHub profile
+                    userLink.href = item.html_url;
+                    userLink.textContent = item.login; // Display the user's login as a clickable link
+
+                    h1.appendChild(userLink); // Append the anchor to the h1 element
+                    h2.innerHTML = `ID: ${item.id}`;
+                    h3.innerHTML = `Node ID: ${item.node_id}`;
+                    img.src = item.avatar_url;
+                    img.alt = `${item.login}'s Avatar`;
+
+                    div.appendChild(h1);
+                    div.appendChild(h2);
+                    div.appendChild(h3);
+                    div.appendChild(img);
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+    </script>
+</body>
+
+</html>

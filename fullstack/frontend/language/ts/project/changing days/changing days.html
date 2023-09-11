@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Random Day Generator</title>
+    <body style="background-color: aqua;"></body>
+    
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Random Day Generator</h1>
+        <p id="random-day">Click the button to generate a random day!</p>
+        <button id="generate-button">Generate</button>
+    </div>
+    <script >
+        const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+const randomDayElement = document.getElementById('random-day');
+const generateButton = document.getElementById('generate-button');
+
+generateButton.addEventListener('click', () => {
+    const randomIndex = Math.floor(Math.random() * daysOfWeek.length);
+    const randomDay = daysOfWeek[randomIndex];
+    randomDayElement.textContent = `Random Day: ${randomDay}`;
+});
+
+    </script>
+</body>
+</html>

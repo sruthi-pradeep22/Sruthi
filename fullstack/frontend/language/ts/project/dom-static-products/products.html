@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click to Display Images</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+}
+
+#showImagesBtn {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.image-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.image {
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+    </style>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <button id="showImagesBtn">Click Me</button>
+    <div class="image-container" id="imageContainer">
+        <!-- Images will be added dynamically using JavaScript -->
+    </div>
+    <script>const imageUrls = [
+        
+        'img2.jpg',
+        'img3.jpg',
+        'img4.jpg',
+        'img5.jpg',
+        'img6.jpg',
+        'img7.jpg',
+        'img9.jpg',
+        'img10.jpg'
+        
+     ];
+    
+    const showImagesBtn = document.getElementById('showImagesBtn');
+    const imageContainer = document.getElementById('imageContainer');
+    
+    showImagesBtn.addEventListener('click', () => {
+        imageContainer.innerHTML = ''; // Clear existing images
+    
+        imageUrls.forEach(url => {
+            const imageElement = document.createElement('img');
+            imageElement.src = url;
+            imageElement.alt = 'Image';
+            imageElement.classList.add('image');
+            imageContainer.appendChild(imageElement);
+        });
+    });
+    </script>
+</body>
+</html>

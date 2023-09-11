@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<h1>Random Month Guessing Game</h1>
+<p>Click the button to generate a random month. Can you guess it?</p>
+<button id="generateButton">Generate Random Month</button>
+<p id="result"></p>
+<script>
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const generateButton = document.getElementById("generateButton");
+  const result = document.getElementById("result");
+
+  generateButton.addEventListener("click", () => {
+    const randomMonthIndex = Math.floor(Math.random() * months.length);
+    const randomMonth = months[randomMonthIndex];
+    
+    const userGuess = prompt("Guess the month:");
+    
+    if (userGuess && userGuess.toLowerCase() === randomMonth.toLowerCase()) {
+      result.textContent = "Congratulations! You guessed correctly!";
+    } else {
+      result.textContent = `Oops! The correct month was ${randomMonth}.`;
+    }
+  });
+</script>
+</body>
+</html>
